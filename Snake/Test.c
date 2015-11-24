@@ -5,8 +5,15 @@
  *      Author: corentin
  */
 
-int main(int argc, char **argv) {
-	printf("TEST !!!");
-	return 1;
+#include <allegro.h>
+#include <stdlib.h><br/><br/>
+
+int main(void)
+{
+  allegro_init();
+  allegro_message("Hello World!");
+
+  return EXIT_SUCCESS;
 }
+END_OF_MAIN()
 
