@@ -1,4 +1,0 @@
-# Snake
-
-
-Test git Eclipse.

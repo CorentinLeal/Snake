@@ -1,5 +1,4 @@
 #include <allegro.h>
-#include <winalleg.h>
 #include <stdio.h>
 
 #define SCREEN_WIDTH    640
@@ -210,9 +209,9 @@ int main()
         exit(1);
      }
     char tile_filename[64];
-    sprintf (tile_filename, "src\\resources\\tile%d.bmp", 0);
+    sprintf (tile_filename, "Snake\\resources\\tile%d.bmp", 0);
     Tiles[0] = load_bitmap (tile_filename, NULL);
-    sprintf (tile_filename, "src\\resources\\tile%d.bmp", 1);
+    sprintf (tile_filename, "Snake\\resources\\tile%d.bmp", 1);
     Tiles[1] = load_bitmap (tile_filename, NULL);
     if (Tiles[0] == NULL){
         fprintf (stderr, "tile%d.bmp could not be loaded. program terminated\n", 0);
@@ -255,7 +254,7 @@ int main()
             snakeBody = snakeBody -> nextElement;
         }
         renderMap(snakeHead);
-        Sleep(500);
+        rest(500);
     }
     return 0;
 } END_OF_MAIN() ;
