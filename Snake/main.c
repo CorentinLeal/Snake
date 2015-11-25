@@ -3,7 +3,7 @@
 
 #define SCREEN_WIDTH    640
 #define SCREEN_HEIGHT   480
-#define SCREEN_DEPTH    16
+#define SCREEN_DEPTH    32
 
 #define TILE_SIZE       32
 #define TILE_COUNT      3
@@ -56,7 +56,7 @@ typedef struct SnakeBody {
 
 
 
-void headMove(SnakeHead *snakeHead){
+int headMove(SnakeHead *snakeHead){
     int direction = snakeHead -> direction;
     if (direction == UP) {
         snakeHead -> y--;
@@ -84,18 +84,18 @@ void headMove(SnakeHead *snakeHead){
    else if (snakeHead -> y < 0) {
         snakeHead -> y = MAP_WIDTH-1;
     }
+    return 0;
 }
 
-void renderMap (SnakeHead *snakeHead)
-{
+int renderMap (SnakeHead *snakeHead){
 
- clear_bitmap(DoubleBuffer);
- int mx = snakeHead -> x;
- int my = snakeHead -> y;
-   int requested_tile = 0;
+    clear_bitmap(DoubleBuffer);
+    int mx = snakeHead -> x;
+    int my = snakeHead -> y;
+    int requested_tile = 0;
 
-   int tile_x = mx * Tiles[requested_tile]->w;
-   int tile_y = my * Tiles[requested_tile]->h;
+    int tile_x = mx * Tiles[requested_tile]->w;
+    int tile_y = my * Tiles[requested_tile]->h;
 
    blit (Tiles[requested_tile],
          DoubleBuffer,
@@ -121,10 +121,10 @@ void renderMap (SnakeHead *snakeHead)
 
     }
     showScreen();
-
+    return 0;
 }
 
-void showScreen ()
+int showScreen ()
 {
  // blit the whole double buffer to the screen
  blit (DoubleBuffer,     // source Allegro BITMAP*
@@ -133,6 +133,8 @@ void showScreen ()
        0, 0,             // destination x, y
        DoubleBuffer->w,  // destination width
        DoubleBuffer->h); // destination height
+
+    return 0;
 }
 
 SnakeBody *newSnakeBody (int x, int y) {
@@ -143,7 +145,7 @@ SnakeBody *newSnakeBody (int x, int y) {
     return snakeBody;
 }
 
-void snakeMove (SnakeHead *snakeHead) {
+int snakeMove (SnakeHead *snakeHead) {
     int previousX = snakeHead -> x;
     int previousY = snakeHead -> y;
     headMove(snakeHead);
@@ -173,7 +175,7 @@ void snakeMove (SnakeHead *snakeHead) {
         }
         snakeBody = snakeBody -> nextElement;
     }
-
+    return 0;
 }
 
 SnakeHead* initialiseSnake () {
@@ -245,7 +247,7 @@ int main()
         }
         printf("DIRECTION = %d \n", snakeHead -> direction);
         snakeMove(snakeHead);
-        printf ("Tête : x=%d, y=%d \n", snakeHead -> x, snakeHead -> y);
+        printf ("TÃªte : x=%d, y=%d \n", snakeHead -> x, snakeHead -> y);
         SnakeBody *snakeBody = snakeHead -> nextElement;
         int i = 1;
         while (snakeBody != NULL) {
