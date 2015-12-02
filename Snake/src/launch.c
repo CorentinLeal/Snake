@@ -24,4 +24,5 @@ int play(Launch *launch) {
         rest(250);
         colision = gameRound(launch -> game);
     }
+    return 0;
 }
