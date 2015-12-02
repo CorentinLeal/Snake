@@ -4,8 +4,6 @@
 
 /**
 * Create and return a Draw.
-* @param    x : la position en x du SnakeBody
-*           y : la position en y du SnakeBody
 */
 Draw* initDraw () {
     Draw* draw = malloc(sizeof(Draw));
@@ -21,10 +19,10 @@ Draw* initDraw () {
 
     char tile_filename[64];
 
-    sprintf (tile_filename, "Snake/resources/tile%d.bmp", TILE_HEAD);
+    sprintf (tile_filename, "Snake/resources/tile%d.tga", TILE_HEAD);
     draw -> tiles[TILE_HEAD] = load_bitmap (tile_filename, NULL);
 
-    sprintf (tile_filename, "Snake/resources/tile%d.bmp", TILE_BODY);
+    sprintf (tile_filename, "Snake/resources/tile%d.tga", TILE_BODY);
     draw -> tiles[TILE_BODY] = load_bitmap (tile_filename, NULL);
 
     if (draw -> tiles[TILE_HEAD] == NULL){
