@@ -21,7 +21,7 @@ int play(Launch *launch) {
     int colision = 0;
     while (colision == 0) {
         renderMap(game, draw);
-        rest(1);
+        rest(250);
         colision = gameRound(launch -> game);
     }
     return 0;

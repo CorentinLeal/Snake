@@ -7,6 +7,7 @@
 Game* initGame(){
     Game *game = malloc(sizeof(Game));
     game -> snakeHead = initSnake();
+    game -> apple = initApple();
     allegroInit();
     return game;
 }
@@ -68,7 +69,7 @@ int gameRound(Game *game, Apple *apple){
         }
     }
 
-    checkColisionApple();
+    checkColisionApple(game);
 
     return gameOver;
 }
@@ -77,8 +78,8 @@ int checkColisionApple(Game* game){
 
     SnakeHead* snake = game -> snakeHead;
     Apple* apple = game -> apple;
-    int appleX = game -> apple -> x;
-    int appleY = game -> apple -> y;
+    int appleX = apple -> x;
+    int appleY = apple -> y;
     int snakeX = game -> snakeHead -> x;
     int snakeY = game -> snakeHead -> y;
 
