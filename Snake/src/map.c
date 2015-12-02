@@ -4,14 +4,28 @@
 #include "map.h"
 
 
-//Apple* initApple(){
-//    Apple* apple = malloc(sizeof(Apple));
-//    apple -> x = rand() % MAP_WIDTH;
-//    apple -> y = rand() % MAP_HEIGHT;
-//    int point = rand() % 10;
-//    if(point == 0){
-//        apple -> point = POINT_MAGIC;
-//    }else{
-//        apple -> point = POINT_CLASSIC;
-//    }
-//}
+Map* initMap(int walls){
+    Map* map = malloc(sizeof(Map));
+
+    int i;
+    int j;
+
+    if(walls==1){
+        for(i=0; i<MAP_WIDTH; i++){
+
+            for(j=0; j<MAP_HEIGHT; j++){
+                map -> field[i][j] = 0;
+            }
+
+        }
+    }
+    for(i=0; i<MAP_WIDTH; i++){
+
+        for(j=0; j<MAP_HEIGHT; j++){
+            printf("%d",  map -> field[i][j]);
+        }
+        printf("\n");
+    }
+
+    return map;
+}
