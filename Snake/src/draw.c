@@ -8,7 +8,6 @@
 *           y : la position en y du SnakeBody
 */
 Draw* initDraw () {
-
     Draw* draw = malloc(sizeof(Draw));
 
     draw -> doubleBuffer = create_bitmap (SCREEN_WIDTH, SCREEN_HEIGHT);
@@ -38,9 +37,8 @@ Draw* initDraw () {
     return draw;
 }
 
-int renderMap (Game* game){
+int renderMap (Game* game, Draw* draw){
 
-    Draw* draw = game -> draw;
     SnakeHead* snakeHead = game -> snakeHead;
 
     clear_bitmap(draw -> doubleBuffer);
@@ -50,7 +48,7 @@ int renderMap (Game* game){
     return 0;
 }
 
-int renderSnake(SnakeHead * snakeHead, BITMAP* doubleBuffer, TILES* tiles[TILE_COUNT]){
+int renderSnake(SnakeHead * snakeHead, BITMAP* doubleBuffer, BITMAP* tiles[TILE_COUNT]){
     int mx = snakeHead -> x;
     int my = snakeHead -> y;
     int requestedTile = TILE_HEAD;
@@ -71,18 +69,19 @@ int renderSnake(SnakeHead * snakeHead, BITMAP* doubleBuffer, TILES* tiles[TILE_C
         mx = snakeBody -> x;
         my = snakeBody -> y;
 
-        tileX = mx * tiles[requested_tile]->w;
-        tileY = my * tiles[requested_tile]->h;
+        tileX = mx * tiles[requestedTile]->w;
+        tileY = my * tiles[requestedTile]->h;
 
-        blit (tiles[requested_tile],
+        blit (tiles[requestedTile],
             doubleBuffer, 0, 0,
             tileX, tileY,
-            tiles[requested_tile]->w,
-            tiles[requested_tile]->h);
+            tiles[requestedTile]->w,
+            tiles[requestedTile]->h);
 
         snakeBody = snakeBody -> nextElement;
 
     }
+    return 0;
 }
 
 int showScreen (BITMAP* doubleBuffer){
