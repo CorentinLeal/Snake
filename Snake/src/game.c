@@ -23,11 +23,13 @@ int allegroInit() {
 }
 
 // main function of the game
-int gameRound(Game *game){
+int gameRound(Game *game, Apple *apple){
+
     SnakeHead *snakeHead = game -> snakeHead;
     int currentDirection = snakeHead->direction;
     int colision;
     int gameOver = 0;
+
     while (keypressed()) {
 
         int lastKey = readkey();
@@ -65,5 +67,29 @@ int gameRound(Game *game){
             gameOver = 1;
         }
     }
+
+    checkColisionApple();
+
     return gameOver;
+}
+
+int checkColisionApple(Game* game){
+
+    snake = game -> snakeHead;
+    apple = game -> apple;
+    appleX = game -> apple -> x;
+    appleY = game -> apple -> y;
+    snakeX = game -> snakeHead -> x;
+    snakeY = game -> snakeHead -> y;
+
+    if((appleX == snakeX) && (appleY == snakeY)){
+
+        snake -> growth = apple -> point;
+        game -> apple = initApple();
+        return 0;
+
+    }
+
+    return 0;
+
 }
