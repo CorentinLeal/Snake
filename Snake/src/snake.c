@@ -95,8 +95,13 @@ int snakeMove (SnakeHead *snakeHead) {
             snakeBody = snakeBody -> nextElement;
         }
         if (snakeHead -> growth > 0) {
-            snakeTail-> nextElement = newSnakeBody(previousX, previousY);
-            snakeHead -> growth--;
+            if (previousX == headX && previousY == headY) {
+                return 1;
+            }
+            else {
+                snakeTail-> nextElement = newSnakeBody(previousX, previousY);
+                snakeHead -> growth--;
+            }
         }
     }
     return 0;

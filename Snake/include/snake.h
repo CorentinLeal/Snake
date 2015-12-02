@@ -5,7 +5,7 @@ typedef struct SnakeHead SnakeHead;
 typedef struct SnakeBody SnakeBody;
 
 static const int baseHealth = 3;
-static const int baseSize = 7;
+static const int baseSize = 50;
 
 
 typedef struct SnakeHead {
