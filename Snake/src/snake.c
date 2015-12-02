@@ -69,6 +69,8 @@ int snakeMove (SnakeHead *snakeHead) {
     int previousX = snakeHead -> x;
     int previousY = snakeHead -> y;
     headMove(snakeHead);
+    int headX = snakeHead -> x;
+    int headY = snakeHead -> y;
     int newX;
     int newY;
     SnakeBody *snakeBody = snakeHead -> nextElement;
@@ -84,6 +86,9 @@ int snakeMove (SnakeHead *snakeHead) {
             previousY = snakeBody -> y;
             snakeBody -> x = newX;
             snakeBody -> y = newY;
+            if (newX == headX && newY == headY) {
+                return 1;
+            }
             if (snakeBody -> nextElement == NULL) {
                 snakeTail = snakeBody;
             }
@@ -106,7 +111,18 @@ SnakeHead* initSnake () {
     snakeHead -> x = 6;
     snakeHead -> y = 1;
     snakeHead -> direction = RIGHT;
-    snakeHead -> growth = 5;
+    snakeHead -> growth = baseSize;
+    snakeHead -> health = baseHealth;
     snakeHead -> nextElement = NULL;
     return snakeHead;
+}
+
+int looseLife(SnakeHead* snakeHead) {
+    snakeHead -> x = 6;
+    snakeHead -> y = 1;
+    snakeHead -> direction = RIGHT;
+    snakeHead -> growth = baseSize;
+    snakeHead -> health--;
+    snakeHead -> nextElement = NULL;
+    return 0;
 }

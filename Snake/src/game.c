@@ -26,8 +26,8 @@ int allegroInit() {
 int gameRound(Game *game){
     SnakeHead *snakeHead = game -> snakeHead;
     int currentDirection = snakeHead->direction;
-
-
+    int colision;
+    int gameOver = 0;
     while (keypressed()) {
 
         int lastKey = readkey();
@@ -47,7 +47,7 @@ int gameRound(Game *game){
         }
     }
     printf("DIRECTION = %d \n", snakeHead -> direction);
-    snakeMove(snakeHead);
+    colision = snakeMove(snakeHead);
     printf ("Tête : x=%d, y=%d \n", snakeHead -> x, snakeHead -> y);
     SnakeBody *snakeBody = snakeHead -> nextElement;
     int i = 1;
@@ -56,5 +56,14 @@ int gameRound(Game *game){
         i++;
         snakeBody = snakeBody -> nextElement;
     }
-    return 0;
+
+    if (colision) {
+        if (snakeHead -> health > 1) {
+            looseLife(snakeHead);
+        }
+        else {
+            gameOver = 1;
+        }
+    }
+    return gameOver;
 }

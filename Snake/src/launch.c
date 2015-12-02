@@ -18,9 +18,10 @@ Launch* initLauch() {
 int play(Launch *launch) {
     Game* game = launch-> game;
     Draw* draw = launch-> draw;
-    while (1) {
-        gameRound(launch -> game);
+    int colision = 0;
+    while (colision == 0) {
         renderMap(game, draw);
-        rest(500);
+        rest(250);
+        colision = gameRound(launch -> game);
     }
 }
