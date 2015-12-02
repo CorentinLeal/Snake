@@ -28,12 +28,12 @@ int headMove(SnakeHead *snakeHead){
             snakeHead -> y = y-1;
         }
         else {
-            snakeHead -> y = MAP_WIDTH-1;
+            snakeHead -> y = MAP_HEIGHT-1;
         }
     }
     else if (direction == DOWN) {
         int y = snakeHead -> y;
-        if (y+1 < MAP_WIDTH) {
+        if (y+1 < MAP_HEIGHT) {
             snakeHead -> y = y+1;
         }
         else {
@@ -42,7 +42,7 @@ int headMove(SnakeHead *snakeHead){
     }
     else if (direction == RIGHT) {
         int x = snakeHead -> x;
-        if (x+1 < MAP_HEIGHT) {
+        if (x+1 < MAP_WIDTH) {
             snakeHead -> x = x+1;
         }
         else {
@@ -55,7 +55,7 @@ int headMove(SnakeHead *snakeHead){
             snakeHead -> x = x-1;
         }
         else {
-            snakeHead -> x = MAP_HEIGHT-1;
+            snakeHead -> x = MAP_WIDTH-1;
         }
     }
     return 0;
