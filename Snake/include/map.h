@@ -5,7 +5,7 @@
 #define MAP_HEIGHT 20
 
 typedef struct Map {
-    int Map[MAP_HEIGHT][MAP_WIDTH];
+    int field[MAP_HEIGHT][MAP_WIDTH];
 }Map;
 
 Map* initMap();
