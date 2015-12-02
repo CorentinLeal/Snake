@@ -2,6 +2,7 @@
 #define GAME_H_INCLUDED
 
 #include "snake.h"
+#include "apple.h"
 
 
 typedef struct Game Game;

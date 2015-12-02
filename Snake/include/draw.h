@@ -12,7 +12,7 @@ static const int SCREEN_DEPTH = 32;
 
 static const int TILE_HEAD = 0;
 static const int TILE_BODY = 1;
-static const int TITE_APPLE_CLASSIC = 2;
+static const int TILE_APPLE_CLASSIC = 2;
 
 ////////////////////////////////////
 

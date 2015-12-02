@@ -75,12 +75,12 @@ int gameRound(Game *game, Apple *apple){
 
 int checkColisionApple(Game* game){
 
-    snake = game -> snakeHead;
-    apple = game -> apple;
-    appleX = game -> apple -> x;
-    appleY = game -> apple -> y;
-    snakeX = game -> snakeHead -> x;
-    snakeY = game -> snakeHead -> y;
+    SnakeHead* snake = game -> snakeHead;
+    Apple* apple = game -> apple;
+    int appleX = game -> apple -> x;
+    int appleY = game -> apple -> y;
+    int snakeX = game -> snakeHead -> x;
+    int snakeY = game -> snakeHead -> y;
 
     if((appleX == snakeX) && (appleY == snakeY)){
 
