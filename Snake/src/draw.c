@@ -10,29 +10,32 @@
 Draw* initDraw () {
     Draw* draw = malloc(sizeof(Draw));
 
+    set_color_depth(SCREEN_DEPTH);
+    set_gfx_mode (GFX_AUTODETECT_WINDOWED, SCREEN_WIDTH, SCREEN_HEIGHT, 0, 0);
+
     draw -> doubleBuffer = create_bitmap (SCREEN_WIDTH, SCREEN_HEIGHT);
-     if (draw -> doubleBuffer == NULL){
+    if (draw -> doubleBuffer == NULL){
         fprintf (stderr, "double buffer could not be created. program terminated\n");
         exit(1);
      }
 
     char tile_filename[64];
+
     sprintf (tile_filename, "Snake/resources/tile%d.bmp", TILE_HEAD);
     draw -> tiles[TILE_HEAD] = load_bitmap (tile_filename, NULL);
-    sprintf (tile_filename, "Snake/resources/tile%d.bmp", TILE_BODY);
 
+    sprintf (tile_filename, "Snake/resources/tile%d.bmp", TILE_BODY);
     draw -> tiles[TILE_BODY] = load_bitmap (tile_filename, NULL);
 
     if (draw -> tiles[TILE_HEAD] == NULL){
-        fprintf (stderr, "tile%d.bmp could not be loaded. program terminated\n", TILE_HEAD);
+        fprintf (stderr, "tile%d.png could not be loaded. program terminated\n", TILE_HEAD);
         exit(1); // terminate program
     } else if (draw -> tiles[TILE_BODY] == NULL){
-        fprintf (stderr, "tile%d.bmp could not be loaded. program terminated\n", TILE_BODY);
+        fprintf (stderr, "tile%d.png could not be loaded. program terminated\n", TILE_BODY);
         exit(1); // terminate program
     }
 
-    set_color_depth(SCREEN_DEPTH);
-    set_gfx_mode (GFX_AUTODETECT_WINDOWED, SCREEN_WIDTH, SCREEN_HEIGHT, 0, 0);
+
 
     return draw;
 }
