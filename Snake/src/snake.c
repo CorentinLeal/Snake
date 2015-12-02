@@ -2,7 +2,7 @@
 #include <stdio.h>
 #include "snake.h"
 #include "directionVariables.h"
-#include "mapVariables.h"
+#include "map.h"
 
 /**
 * Crée et retourne un SnakeBody.
