@@ -26,7 +26,7 @@ Draw* initDraw () {
     draw -> tiles[TILE_BODY] = load_bitmap (tile_filename, NULL);
 
     sprintf (tile_filename, "Snake/resources/tile%d.tga", TILE_APPLE_CLASSIC);
-    draw -> tiles[TILE_BODY] = load_bitmap (tile_filename, NULL);
+    draw -> tiles[TILE_APPLE_CLASSIC] = load_bitmap (tile_filename, NULL);
 
     if (draw -> tiles[TILE_HEAD] == NULL){
         fprintf (stderr, "tile%d.tga could not be loaded. program terminated\n", TILE_HEAD);
