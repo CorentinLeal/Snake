@@ -28,6 +28,9 @@ Draw* initDraw () {
     sprintf (tile_filename, "Snake/resources/tile%d.tga", TILE_APPLE_CLASSIC);
     draw -> tiles[TILE_APPLE_CLASSIC] = load_bitmap (tile_filename, NULL);
 
+    sprintf (tile_filename, "Snake/resources/tile%d.tga", TILE_APPLE_MAGIC);
+    draw -> tiles[TILE_APPLE_MAGIC] = load_bitmap (tile_filename, NULL);
+
     if (draw -> tiles[TILE_HEAD] == NULL){
         fprintf (stderr, "tile%d.tga could not be loaded. program terminated\n", TILE_HEAD);
         exit(1); // terminate program
@@ -42,7 +45,7 @@ Draw* initDraw () {
     return draw;
 }
 
-int renderMap (Game* game, Draw* draw){
+int renderGame (Game* game, Draw* draw){
 
     SnakeHead* snakeHead = game -> snakeHead;
     Apple* apple = game -> apple;
@@ -94,7 +97,13 @@ int renderSnake(SnakeHead * snakeHead, BITMAP* doubleBuffer, BITMAP* tiles[TILE_
 int renderApple(Apple* apple, BITMAP* doubleBuffer, BITMAP* tiles[TILE_COUNT]) {
     int mx = apple -> x;
     int my = apple -> y;
-    int requestedTile = TILE_APPLE_CLASSIC;
+
+    int requestedTile;
+    if (apple -> isMagic) {
+        requestedTile = TILE_APPLE_MAGIC;
+    } else {
+        requestedTile = TILE_APPLE_CLASSIC;
+    }
 
     int tileX = mx * tiles[requestedTile]->w;
     int tileY = my * tiles[requestedTile]->h;
@@ -104,9 +113,33 @@ int renderApple(Apple* apple, BITMAP* doubleBuffer, BITMAP* tiles[TILE_COUNT]) {
          0, 0,
          tileX, tileY,
          tiles[requestedTile]->w, tiles[requestedTile]->h);
+    return 0;
 }
+ int renderMap (Map *map, Draw* draw) {
+    int x, y, mx, my, tileX, tileY;
+    int requestedTile = TILE_WALL;
+    for (x=0; x<MAP_WIDTH; x++) {
+        for (y=0; y<MAP_HEIGHT; y++) {
+            if (map -> field[x][y] == 1) {
+                mx=x;
+                my=y;
+                tileX = mx * draw->tiles[requestedTile]->w;
+                tileY = my * draw -> tiles[requestedTile]->h;
+
+                blit (draw -> tiles[requestedTile],
+                     draw -> doubleBuffer,
+                     0, 0,
+                     tileX, tileY,
+                     draw -> tiles[requestedTile]->w, draw -> tiles[requestedTile]->h);
+            }
+        }
+    }
+
+    return 0;
+ }
 
 int showScreen (BITMAP* doubleBuffer){
+
 
      // blit the whole double buffer to the screen
      blit (doubleBuffer,     // source Allegro BITMAP*

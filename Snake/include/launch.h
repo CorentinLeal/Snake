@@ -11,7 +11,7 @@ typedef struct Launch {
     Draw* draw;
 }Launch;
 
-Launch* initLauch();
+Launch* initLaunch();
 int play (Launch* launch);
 
 

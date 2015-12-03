@@ -3,15 +3,16 @@
 #include "launch.h"
 
 int main(){
-    Launch *launch = initLauch();
+    Launch *launch = initLaunch();
     play(launch);
     return 0;
 } END_OF_MAIN() ;
 
-Launch* initLauch() {
+Launch* initLaunch() {
     Launch *launch = malloc(sizeof(Launch));
     launch -> game = initGame();
     launch -> draw = initDraw();
+   // renderMap(launch -> game -> field, launch->draw);
     return launch;
 }
 
@@ -20,8 +21,8 @@ int play(Launch *launch) {
     Draw* draw = launch-> draw;
     int colision = 0;
     while (colision == 0) {
-        renderMap(game, draw);
-        rest(250);
+        renderGame(game, draw);
+        rest(54);
         colision = gameRound(launch -> game);
     }
     return 0;

@@ -8,6 +8,7 @@ Game* initGame(){
     Game *game = malloc(sizeof(Game));
     game -> snakeHead = initSnake();
     game -> apple = initApple();
+    game -> field = initMap(1);
     allegroInit();
     return game;
 }

@@ -33,13 +33,13 @@ Map* initMap(int walls){
 
         }
     }
-//    for(i=0; i<MAP_WIDTH; i++){
-//
-//        for(j=0; j<MAP_HEIGHT; j++){
-//            printf("%d",  map -> field[i][j]);
-//        }
-//        printf("\n");
-//    }
+    for(i=0; i<MAP_WIDTH; i++){
+
+        for(j=0; j<MAP_HEIGHT; j++){
+            printf("%d",  map -> field[i][j]);
+        }
+        printf("\n");
+    }
 
     return map;
 }
