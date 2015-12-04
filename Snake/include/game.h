@@ -19,5 +19,6 @@ Game* initGame();
 int allegroInit();
 int gameRound();
 int checkColisionApple();
+int checkWallColision();
 
 #endif // GAME_H_INCLUDED

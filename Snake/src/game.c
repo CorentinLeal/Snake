@@ -61,7 +61,7 @@ int gameRound(Game *game, Apple *apple){
         snakeBody = snakeBody -> nextElement;
     }
 
-    if (colision) {
+    if (colision || checkWallColision(game)) {
         if (snakeHead -> health > 1) {
             looseLife(snakeHead);
         }
@@ -73,6 +73,12 @@ int gameRound(Game *game, Apple *apple){
     checkColisionApple(game);
 
     return gameOver;
+}
+
+int checkWallColision(Game* game) {
+    SnakeHead* snakeHead = game -> snakeHead;
+    Map *map = game -> field;
+    return map -> field [snakeHead -> x] [snakeHead -> y];
 }
 
 int checkColisionApple(Game* game){

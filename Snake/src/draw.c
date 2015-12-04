@@ -12,6 +12,9 @@ Draw* initDraw () {
     set_gfx_mode (GFX_AUTODETECT_WINDOWED, SCREEN_WIDTH, SCREEN_HEIGHT, 0, 0);
 
     draw -> doubleBuffer = create_bitmap (SCREEN_WIDTH, SCREEN_HEIGHT);
+
+    draw -> mapBuffer = create_bitmap (SCREEN_WIDTH, SCREEN_HEIGHT);
+
     if (draw -> doubleBuffer == NULL){
         fprintf (stderr, "double buffer could not be created. program terminated\n");
         exit(1);
@@ -30,6 +33,9 @@ Draw* initDraw () {
 
     sprintf (tile_filename, "Snake/resources/tile%d.tga", TILE_APPLE_MAGIC);
     draw -> tiles[TILE_APPLE_MAGIC] = load_bitmap (tile_filename, NULL);
+
+    sprintf (tile_filename, "Snake/resources/tile%d.tga", TILE_WALL);
+    draw -> tiles[TILE_WALL] = load_bitmap (tile_filename, NULL);
 
     if (draw -> tiles[TILE_HEAD] == NULL){
         fprintf (stderr, "tile%d.tga could not be loaded. program terminated\n", TILE_HEAD);
@@ -52,9 +58,12 @@ int renderGame (Game* game, Draw* draw){
 
     clear_bitmap(draw -> doubleBuffer);
 
+    renderMap(draw->doubleBuffer, draw->mapBuffer);
     renderApple(apple, draw -> doubleBuffer, draw -> tiles);
     renderSnake(snakeHead, draw -> doubleBuffer, draw -> tiles);
+
     showScreen(draw -> doubleBuffer);
+
     return 0;
 }
 
@@ -115,7 +124,7 @@ int renderApple(Apple* apple, BITMAP* doubleBuffer, BITMAP* tiles[TILE_COUNT]) {
          tiles[requestedTile]->w, tiles[requestedTile]->h);
     return 0;
 }
- int renderMap (Map *map, Draw* draw) {
+ int prepareMap (Map *map, BITMAP* mapBuffer, BITMAP* tiles[TILE_COUNT]) {
     int x, y, mx, my, tileX, tileY;
     int requestedTile = TILE_WALL;
     for (x=0; x<MAP_WIDTH; x++) {
@@ -123,20 +132,30 @@ int renderApple(Apple* apple, BITMAP* doubleBuffer, BITMAP* tiles[TILE_COUNT]) {
             if (map -> field[x][y] == 1) {
                 mx=x;
                 my=y;
-                tileX = mx * draw->tiles[requestedTile]->w;
-                tileY = my * draw -> tiles[requestedTile]->h;
+                tileX = mx * tiles[requestedTile]->w;
+                tileY = my * tiles[requestedTile]->h;
 
-                blit (draw -> tiles[requestedTile],
-                     draw -> doubleBuffer,
+                blit (tiles[requestedTile],
+                     mapBuffer,
                      0, 0,
                      tileX, tileY,
-                     draw -> tiles[requestedTile]->w, draw -> tiles[requestedTile]->h);
+                     tiles[requestedTile]->w, tiles[requestedTile]->h);
             }
         }
     }
 
     return 0;
  }
+
+int renderMap(BITMAP* doubleBuffer, BITMAP* mapBuffer) {
+    blit (mapBuffer,
+          doubleBuffer,
+          0, 0,
+          0, 0,
+          mapBuffer->w,
+          mapBuffer->h);
+    return 0;
+}
 
 int showScreen (BITMAP* doubleBuffer){
 

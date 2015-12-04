@@ -3,7 +3,7 @@
 
 #include "game.h"
 #include "map.h"
-#define TILE_COUNT 3 // Ne peut pas être déclaré comme constante
+#define TILE_COUNT 5 // Ne peut pas être déclaré comme constante
 
 static const int SCREEN_WIDTH = 640;
 static const int SCREEN_HEIGHT = 600;
@@ -23,6 +23,7 @@ typedef struct Draw Draw;
 typedef struct Draw {
 
     BITMAP* doubleBuffer;
+    BITMAP* mapBuffer;
     BITMAP* tiles[TILE_COUNT];
 
 }Draw;
@@ -31,7 +32,8 @@ Draw* initDraw();
 int renderGame (Game* game, Draw *draw);
 int renderSnake(SnakeHead * snakeHead, BITMAP* doubleBuffer, BITMAP* tiles[TILE_COUNT]);
 int renderApple(Apple* apple, BITMAP* doubleBuffer, BITMAP* tiles[TILE_COUNT]);
-int renderMap (Map* map, Draw *draw);
+int prepareMap (Map* field, BITMAP* mapBuffer, BITMAP* tiles[TILE_COUNT]);
+int renderMap (BITMAP* doubleBuffer, BITMAP* mapBuffer);
 int showScreen (BITMAP* doubleBuffer);
 
 #endif // DRAW_H_INCLUDED

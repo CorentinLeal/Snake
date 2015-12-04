@@ -12,7 +12,7 @@ Launch* initLaunch() {
     Launch *launch = malloc(sizeof(Launch));
     launch -> game = initGame();
     launch -> draw = initDraw();
-   // renderMap(launch -> game -> field, launch->draw);
+    prepareMap(launch ->game->field, launch->draw->mapBuffer, launch->draw->tiles);
     return launch;
 }
 
@@ -22,7 +22,7 @@ int play(Launch *launch) {
     int colision = 0;
     while (colision == 0) {
         renderGame(game, draw);
-        rest(54);
+        rest(250);
         colision = gameRound(launch -> game);
     }
     return 0;
