@@ -18,7 +18,7 @@ SnakeBody *newSnakeBody (int x, int y) {
 }
 
 /**
-* Fais avancer le snakeHead en paramètre en fonction de sa direction.
+* Fait avancer le snakeHead en paramètre en fonction de sa direction.
 */
 int headMove(SnakeHead *snakeHead){
     int direction = snakeHead -> direction;
@@ -68,12 +68,14 @@ int headMove(SnakeHead *snakeHead){
 int snakeMove (SnakeHead *snakeHead) {
     int previousX = snakeHead -> x;
     int previousY = snakeHead -> y;
+    // on commence par faire bouger la tete
     headMove(snakeHead);
     int headX = snakeHead -> x;
     int headY = snakeHead -> y;
     int newX;
     int newY;
     SnakeBody *snakeBody = snakeHead -> nextElement;
+    // Si besoin, faire grandir le snake
     if (snakeBody == NULL && snakeHead -> growth > 0) {
         snakeHead -> nextElement = newSnakeBody(previousX, previousY);
         snakeHead -> growth--;
@@ -110,7 +112,6 @@ int snakeMove (SnakeHead *snakeHead) {
 /**
 * Initialise un snake.
 */
-
 SnakeHead* initSnake () {
     SnakeHead *snakeHead = malloc(sizeof(SnakeHead));
     snakeHead -> x = 6;
@@ -122,6 +123,9 @@ SnakeHead* initSnake () {
     return snakeHead;
 }
 
+/**
+* Retire une vie
+*/
 int looseLife(SnakeHead* snakeHead) {
     snakeHead -> x = 6;
     snakeHead -> y = 1;
