@@ -69,6 +69,8 @@ int renderGame (Game* game, Draw* draw){
     renderApple(apple, draw -> doubleBuffer, draw -> tiles);
     renderSnake(snakeHead, draw -> doubleBuffer, draw -> tiles);
 
+    writeScore(30, draw ->doubleBuffer);
+    writeLife(game->snakeHead->health, draw->doubleBuffer);
 
     showScreen(draw -> doubleBuffer);
 
@@ -175,6 +177,24 @@ int renderPause(Draw *draw) {
        draw ->tiles[TILE_PAUSE]->h);
     showScreen(draw->doubleBuffer);
     return 0;
+}
+
+int writeScore(int score, BITMAP* doubleBuffer) {
+    char* scoreOutput = "Score : ";
+    char finalOutput[11];
+    sprintf(finalOutput, "%s %d", scoreOutput, score);
+    textout_ex(doubleBuffer, font, finalOutput, 5, SCREEN_HEIGHT - 20,
+		 makecol(0, 0, 255), -1);
+		 return 0;
+}
+
+int writeLife (int life, BITMAP* doubleBuffer) {
+    char* lifeOutput = "Vie : ";
+    char finalOutput[11];
+    sprintf(finalOutput, "%s %d", lifeOutput, life);
+    textout_ex(doubleBuffer, font, finalOutput, 5, SCREEN_HEIGHT - 40,
+		 makecol(0, 0, 255), -1);
+		 return 0;
 }
 int showScreen (BITMAP* doubleBuffer){
 
