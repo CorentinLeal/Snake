@@ -48,12 +48,14 @@ int gameRound(Game *game){
     printf ("Tête : x=%d, y=%d \n", snakeHead -> x, snakeHead -> y);
     SnakeBody *snakeBody = snakeHead -> nextElement;
     int i = 1;
+    // Tant que nous ne sommes pas arrivés au bout du snake
     while (snakeBody != NULL) {
         printf("Part %d : x=%d , y=%d \n", i, snakeBody -> x, snakeBody -> y);
         i++;
         snakeBody = snakeBody -> nextElement;
     }
 
+    //Vérifie si une colision avec lui-même ou un mur a eu lieu
     if (colision || checkWallColision(game)) {
         if (snakeHead -> health > 1) {
             looseLife(snakeHead);
@@ -63,16 +65,24 @@ int gameRound(Game *game){
         }
     }
 
+    // Vérifie si le Snake est en colision avec une pomme
     colisionApple(game);
 
     return gameOver;
 }
 
+/**
+* Vérifie si une collision avec un mur a eu lieu
+*/
 int checkWallColision(Game* game) {
     SnakeHead* snakeHead = game -> snakeHead;
     Map *map = game -> field;
     return map -> field [snakeHead -> x] [snakeHead -> y];
 }
+
+/**
+* Vérifie si une collision avec une pomme a eu lieu
+*/
 int colisionApple(Game* game){
 
     SnakeHead* snake = game -> snakeHead;
@@ -95,7 +105,9 @@ int colisionApple(Game* game){
 
 }
 
-
+/**
+* Place la pomme en dehors des murs et du Snake
+*/
 Apple* placeApple(SnakeHead* snakeHead, Map* field){
     int placed = 0;
     SnakeBody *element = snakeHead -> nextElement;
@@ -124,11 +136,13 @@ Apple* placeApple(SnakeHead* snakeHead, Map* field){
     return apple;
 }
 
+/**
+* Met le jeu en pause
+*/
 int pause () {
     int pauseEnd = 0;
     while (!pauseEnd) {
         if (keypressed() && readkey() >> 8 == KEY_P) {
-            printf("lol");
             pauseEnd = 1;
         }
     }
