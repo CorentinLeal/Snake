@@ -9,6 +9,7 @@ Game* initGame(){
     game -> snakeHead = initSnake();
     game -> apple = initApple();
     game -> field = initMap(1);
+    game -> score = 0;
     allegroInit();
     return game;
 }
@@ -97,6 +98,7 @@ int checkColisionApple(Game* game){
     if((appleX == snakeX) && (appleY == snakeY)){
 
         snake -> growth = apple -> point;
+        game -> score += apple -> point;
         game -> apple = initApple();
         return 0;
 

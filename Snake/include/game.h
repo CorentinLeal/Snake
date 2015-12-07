@@ -13,6 +13,7 @@ typedef struct Game {
     SnakeHead *snakeHead;
     Apple *apple;
     Map *field;
+    int score;
 }Game;
 
 Game* initGame();
