@@ -8,7 +8,8 @@ Game* initGame(){
     Game *game = malloc(sizeof(Game));
     game -> snakeHead = initSnake();
     game -> apple = placeApple(game -> snakeHead);
-
+    game -> field = initMap(1);
+    game -> score = 0;
     allegroInit();
     return game;
 }
@@ -25,7 +26,7 @@ int allegroInit() {
 }
 
 // main function of the game
-int gameRound(Game *game, Apple *apple){
+int gameRound(Game *game){
 
     SnakeHead *snakeHead = game -> snakeHead;
     int currentDirection = snakeHead->direction;
@@ -48,7 +49,10 @@ int gameRound(Game *game, Apple *apple){
         }else if (lastKey >> 8 == KEY_RIGHT && currentDirection != LEFT){
             printf("You pressed right\n");
             snakeHead->direction = RIGHT;
+        }else if(lastKey >> 8 == KEY_P) {
+            return 2;
         }
+
     }
     printf("DIRECTION = %d \n", snakeHead -> direction);
     colision = snakeMove(snakeHead);
@@ -61,7 +65,7 @@ int gameRound(Game *game, Apple *apple){
         snakeBody = snakeBody -> nextElement;
     }
 
-    if (colision) {
+    if (colision || checkWallColision(game)) {
         if (snakeHead -> health > 1) {
             looseLife(snakeHead);
         }
@@ -75,6 +79,11 @@ int gameRound(Game *game, Apple *apple){
     return gameOver;
 }
 
+int checkWallColision(Game* game) {
+    SnakeHead* snakeHead = game -> snakeHead;
+    Map *map = game -> field;
+    return map -> field [snakeHead -> x] [snakeHead -> y];
+}
 int colisionApple(Game* game){
 
     SnakeHead* snake = game -> snakeHead;
@@ -89,13 +98,13 @@ int colisionApple(Game* game){
         snake -> growth = apple -> point;
         free(apple);
         game -> apple = placeApple(snake);
-        return 0;
-
+        game -> score += apple -> point;
     }
 
     return 0;
 
 }
+
 
 Apple* placeApple(SnakeHead* snakeHead){
     int placed = 0;
@@ -119,4 +128,15 @@ Apple* placeApple(SnakeHead* snakeHead){
     }
     free(element);
     return apple;
+}
+
+int pause () {
+    int pauseEnd = 0;
+    while (!pauseEnd) {
+        if (keypressed() && readkey() >> 8 == KEY_P) {
+            printf("lol");
+            pauseEnd = 1;
+        }
+    }
+    return 0;
 }

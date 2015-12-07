@@ -11,8 +11,9 @@ typedef struct Launch {
     Draw* draw;
 }Launch;
 
-Launch* initLauch();
+Launch* initLaunch();
 int play (Launch* launch);
+int gamePause(Launch *launch);
 
 
 #endif // LAUNCH_H_INCLUDED
