@@ -195,7 +195,7 @@ int writeScore(int score, BITMAP* doubleBuffer) {
     char* scoreOutput = "Score : ";
     char finalOutput[11];
     sprintf(finalOutput, "%s %d", scoreOutput, score);
-    textout_ex(doubleBuffer, font, finalOutput, 5, SCREEN_HEIGHT - 20,
+    textout_ex(doubleBuffer, font, finalOutput, 5, SCREEN_HEIGHT - 15,
 		 makecol(255, 255, 255), -1);
 		 return 0;
 }
@@ -204,7 +204,7 @@ int writeLife (int life, BITMAP* doubleBuffer) {
     char* lifeOutput = "Vie : ";
     char finalOutput[11];
     sprintf(finalOutput, "%s %d", lifeOutput, life);
-    textout_ex(doubleBuffer, font, finalOutput, 5, SCREEN_HEIGHT - 40,
+    textout_ex(doubleBuffer, font, finalOutput, 5, SCREEN_HEIGHT - 35,
 		 makecol(255, 255, 255), -1);
 		 return 0;
 }
