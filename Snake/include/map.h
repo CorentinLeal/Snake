@@ -1,7 +1,7 @@
 #ifndef MAP_C_INCLUDED
 #define MAP_C_INCLUDED
 
-#define MAP_WIDTH 30
+#define MAP_WIDTH 32
 #define MAP_HEIGHT 30
 
 typedef struct Map {

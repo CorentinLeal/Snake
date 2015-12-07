@@ -14,6 +14,8 @@ typedef struct Launch {
 Launch* initLaunch();
 int play (Launch* launch);
 int gamePause(Launch *launch);
+int allegroInit();
+int waitStart(Launch *launch);
 
 
 #endif // LAUNCH_H_INCLUDED

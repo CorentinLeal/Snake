@@ -40,6 +40,12 @@ Draw* initDraw () {
     sprintf (tile_filename, "Snake/resources/tile%d.tga", TILE_PAUSE);
     draw -> tiles[TILE_PAUSE] = load_bitmap (tile_filename, NULL);
 
+    sprintf (tile_filename, "Snake/resources/tile%d.tga", TILE_MENU);
+    draw -> tiles[TILE_MENU] = load_bitmap (tile_filename, NULL);
+
+    sprintf (tile_filename, "Snake/resources/tile%d.tga", TILE_PLAY);
+    draw -> tiles[TILE_PLAY] = load_bitmap (tile_filename, NULL);
+
     if (draw -> tiles[TILE_HEAD] == NULL){
         fprintf (stderr, "tile%d.tga could not be loaded. program terminated\n", TILE_HEAD);
         exit(1); // terminate program
@@ -51,6 +57,12 @@ Draw* initDraw () {
         exit(1); // terminate program
     }  else if (draw -> tiles[TILE_PAUSE] == NULL){
         fprintf (stderr, "tile%d.tga could not be loaded. program terminated\n", TILE_PAUSE);
+        exit(1); // terminate program
+    } else if (draw -> tiles[TILE_MENU] == NULL){
+        fprintf (stderr, "tile%d.tga could not be loaded. program terminated\n", TILE_MENU);
+        exit(1); // terminate program
+    } else if (draw -> tiles[TILE_PLAY] == NULL){
+        fprintf (stderr, "tile%d.tga could not be loaded. program terminated\n", TILE_PLAY);
         exit(1); // terminate program
     }
 
@@ -195,6 +207,14 @@ int writeLife (int life, BITMAP* doubleBuffer) {
     textout_ex(doubleBuffer, font, finalOutput, 5, SCREEN_HEIGHT - 40,
 		 makecol(255, 255, 255), -1);
 		 return 0;
+}
+
+int renderMenu(Draw* draw) {
+    BITMAP* menu = draw->tiles[TILE_MENU];
+    BITMAP* buttonplay = draw->tiles[TILE_PLAY];
+    blit(menu,draw->doubleBuffer,0,0,0,0,menu->w,menu->h);
+    blit(buttonplay,draw->doubleBuffer,0,0,235,290,buttonplay->w,buttonplay->h);
+    showScreen(draw->doubleBuffer);
 }
 int showScreen (BITMAP* doubleBuffer){
 
