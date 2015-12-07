@@ -10,20 +10,9 @@ Game* initGame(){
     game -> field = initMap(1);
     game -> apple = placeApple(game -> snakeHead, game -> field);
     game -> score = 0;
-    allegroInit();
     return game;
 }
 
-int allegroInit() {
-    if(allegro_init() != 0){
-        return 1;
-    }
-
-    install_timer();
-    install_keyboard();
-
-    return 0;
-}
 
 // main function of the game
 int gameRound(Game *game){

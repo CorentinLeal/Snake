@@ -17,7 +17,6 @@ typedef struct Game {
 }Game;
 
 Game* initGame();
-int allegroInit();
 int gameRound();
 int colisionApple();
 Apple* placeApple();
