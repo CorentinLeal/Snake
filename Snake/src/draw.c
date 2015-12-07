@@ -50,7 +50,7 @@ Draw* initDraw () {
         fprintf (stderr, "tile%d.tga could not be loaded. program terminated\n", TILE_APPLE_CLASSIC);
         exit(1); // terminate program
     }  else if (draw -> tiles[TILE_PAUSE] == NULL){
-        fprintf (stderr, "tile%d.bmp could not be loaded. program terminated\n", TILE_PAUSE);
+        fprintf (stderr, "tile%d.tga could not be loaded. program terminated\n", TILE_PAUSE);
         exit(1); // terminate program
     }
 

@@ -7,8 +7,8 @@
 Game* initGame(){
     Game *game = malloc(sizeof(Game));
     game -> snakeHead = initSnake();
-    game -> apple = placeApple(game -> snakeHead);
     game -> field = initMap(1);
+    game -> apple = placeApple(game -> snakeHead, game -> field);
     game -> score = 0;
     allegroInit();
     return game;
@@ -97,7 +97,7 @@ int colisionApple(Game* game){
 
         snake -> growth = apple -> point;
         free(apple);
-        game -> apple = placeApple(snake);
+        game -> apple = placeApple(snake, game ->field);
         game -> score += apple -> point;
     }
 
@@ -106,19 +106,24 @@ int colisionApple(Game* game){
 }
 
 
-Apple* placeApple(SnakeHead* snakeHead){
+Apple* placeApple(SnakeHead* snakeHead, Map* field){
     int placed = 0;
     SnakeBody *element = snakeHead -> nextElement;
     Apple *apple = initApple();
+
     while(placed==0){
-        if(apple -> x == snakeHead -> x && apple -> y == snakeHead -> y){
+        if (field->field [apple->x] [apple->y])  {
+            free(apple);
+            apple = initApple();
+        }
+        else if(apple -> x == snakeHead -> x && apple -> y == snakeHead -> y){
             free(apple);
             apple = initApple();
         }else if(element != NULL){
             if(apple -> x == element -> x && apple -> y == element -> y){
                 free(apple);
                 apple = initApple();
-            }else{
+            }else if (element -> nextElement == NULL){
                 placed = 1;
             }
             element = element -> nextElement;
@@ -126,7 +131,6 @@ Apple* placeApple(SnakeHead* snakeHead){
             placed =1;
         }
     }
-    free(element);
     return apple;
 }
 
