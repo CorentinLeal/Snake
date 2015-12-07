@@ -17,8 +17,9 @@ typedef struct Game {
 
 Game* initGame();
 int allegroInit();
-int gameRound();
-int checkColisionApple();
-int checkWallColision();
+int gameRound(Game *game);
+int checkColisionApple(Game *game);
+int checkWallColision(Game *game);
+int pause();
 
 #endif // GAME_H_INCLUDED

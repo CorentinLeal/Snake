@@ -25,9 +25,10 @@ int allegroInit() {
 }
 
 // main function of the game
-int gameRound(Game *game, Apple *apple){
+int gameRound(Game *game){
 
     SnakeHead *snakeHead = game -> snakeHead;
+    Apple *apple = game -> apple;
     int currentDirection = snakeHead->direction;
     int colision;
     int gameOver = 0;
@@ -48,7 +49,10 @@ int gameRound(Game *game, Apple *apple){
         }else if (lastKey >> 8 == KEY_RIGHT && currentDirection != LEFT){
             printf("You pressed right\n");
             snakeHead->direction = RIGHT;
+        }else if(lastKey >> 8 == KEY_P) {
+            return 2;
         }
+
     }
     printf("DIRECTION = %d \n", snakeHead -> direction);
     colision = snakeMove(snakeHead);
@@ -100,4 +104,15 @@ int checkColisionApple(Game* game){
 
     return 0;
 
+}
+
+int pause () {
+    int pauseEnd = 0;
+    while (!pauseEnd) {
+        if (keypressed() && readkey() >> 8 == KEY_P) {
+            printf("lol");
+            pauseEnd = 1;
+        }
+    }
+    return 0;
 }

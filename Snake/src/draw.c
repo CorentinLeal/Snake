@@ -37,6 +37,9 @@ Draw* initDraw () {
     sprintf (tile_filename, "Snake/resources/tile%d.tga", TILE_WALL);
     draw -> tiles[TILE_WALL] = load_bitmap (tile_filename, NULL);
 
+    sprintf (tile_filename, "Snake/resources/tile%d.tga", TILE_PAUSE);
+    draw -> tiles[TILE_PAUSE] = load_bitmap (tile_filename, NULL);
+
     if (draw -> tiles[TILE_HEAD] == NULL){
         fprintf (stderr, "tile%d.tga could not be loaded. program terminated\n", TILE_HEAD);
         exit(1); // terminate program
@@ -45,6 +48,9 @@ Draw* initDraw () {
         exit(1); // terminate program
     } else if (draw -> tiles[TILE_APPLE_CLASSIC] == NULL){
         fprintf (stderr, "tile%d.tga could not be loaded. program terminated\n", TILE_APPLE_CLASSIC);
+        exit(1); // terminate program
+    }  else if (draw -> tiles[TILE_PAUSE] == NULL){
+        fprintf (stderr, "tile%d.bmp could not be loaded. program terminated\n", TILE_PAUSE);
         exit(1); // terminate program
     }
 
@@ -59,8 +65,10 @@ int renderGame (Game* game, Draw* draw){
     clear_bitmap(draw -> doubleBuffer);
 
     renderMap(draw->doubleBuffer, draw->mapBuffer);
+
     renderApple(apple, draw -> doubleBuffer, draw -> tiles);
     renderSnake(snakeHead, draw -> doubleBuffer, draw -> tiles);
+
 
     showScreen(draw -> doubleBuffer);
 
@@ -157,6 +165,17 @@ int renderMap(BITMAP* doubleBuffer, BITMAP* mapBuffer) {
     return 0;
 }
 
+int renderPause(Draw *draw) {
+
+    blit (draw ->tiles[TILE_PAUSE],
+       draw->doubleBuffer,
+       0, 0,
+       0, 0,
+       draw ->tiles[TILE_PAUSE]->w,
+       draw ->tiles[TILE_PAUSE]->h);
+    showScreen(draw->doubleBuffer);
+    return 0;
+}
 int showScreen (BITMAP* doubleBuffer){
 
 

@@ -15,6 +15,7 @@ static const int TILE_BODY = 1;
 static const int TILE_APPLE_CLASSIC = 2;
 static const int TILE_APPLE_MAGIC = 3;
 static const int TILE_WALL = 4;
+static const int TILE_PAUSE = 5;
 
 ////////////////////////////////////
 
@@ -30,6 +31,7 @@ typedef struct Draw {
 
 Draw* initDraw();
 int renderGame (Game* game, Draw *draw);
+int renderPause (Draw *draw);
 int renderSnake(SnakeHead * snakeHead, BITMAP* doubleBuffer, BITMAP* tiles[TILE_COUNT]);
 int renderApple(Apple* apple, BITMAP* doubleBuffer, BITMAP* tiles[TILE_COUNT]);
 int prepareMap (Map* field, BITMAP* mapBuffer, BITMAP* tiles[TILE_COUNT]);

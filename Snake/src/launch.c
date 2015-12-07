@@ -19,11 +19,23 @@ Launch* initLaunch() {
 int play(Launch *launch) {
     Game* game = launch-> game;
     Draw* draw = launch-> draw;
-    int colision = 0;
-    while (colision == 0) {
+    int gameOver = 0;
+    int gameReturn;
+    while (!gameOver) {
         renderGame(game, draw);
         rest(250);
-        colision = gameRound(launch -> game);
+        gameReturn = gameRound(launch -> game);
+        if (gameReturn == 1) {
+            gameOver = 1;
+        } else if (gameReturn == 2) {
+            gamePause(launch);
+        }
     }
+    return 0;
+}
+
+int gamePause(Launch* launch) {
+    renderPause(launch -> draw);
+    pause();
     return 0;
 }
