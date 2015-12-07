@@ -96,9 +96,10 @@ int colisionApple(Game* game){
     if((appleX == snakeX) && (appleY == snakeY)){
 
         snake -> growth = apple -> point;
+        game -> score += apple -> point;
         free(apple);
         game -> apple = placeApple(snake, game ->field);
-        game -> score += apple -> point;
+
     }
 
     return 0;
